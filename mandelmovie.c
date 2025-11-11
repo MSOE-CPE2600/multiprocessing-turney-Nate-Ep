@@ -4,6 +4,7 @@
 * @date 9 November 2025
 * @brief Creates a short video zooming into a mandelbrot image set
 * 
+* Assignment: Lab 11 - Multiprocessing
 * Course: CPE2600
 * Section: 111
 * Due: 19 November 2025
