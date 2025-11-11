@@ -8,9 +8,9 @@
 * Section: 111
 * Due: 19 November 2025
 * 
-* To Compile: gcc -Wextra -o mandelmovie mandelmovie.c
-* To Run: ./mandelmovie <num processors>
-* To Stitch Images: ffmpeg -framerate 30 -i mandel%d.jpg -c:v libx264 -pix_fmt yuv420p output.mp4
+* To Compile: gcc -Wextra -o mandelmovie mandelmovie.c -lm
+* To Run: ./mandelmovie -p <num processors>
+* To Stitch Images: ffmpeg -framerate 15 -i mandel%d.jpg -c:v libx264 -pix_fmt yuv420p output.mp4
 */
 
 #include <stdlib.h>
@@ -18,6 +18,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/wait.h>
+#include <math.h>
 
 #define NUM_IMAGES 50
 #define DEFAULT_SCALE 4
@@ -31,7 +32,6 @@ int main (int argc, char *argv[]) {
     if (opt != -1) { //if all command line options have been parsed
         switch(opt) {
             case 'p':
-                printf("Option p selected\nArgument: %s\n", optarg);
                 char *endptr;
                 int num_proc = strtod(optarg, &endptr);
 
@@ -89,7 +89,7 @@ void gen_images(int num_proc) {
         int pid = fork();
 
         if (pid == 0) {
-            sprintf(scale, "%f", (DEFAULT_SCALE - (((float)i) * (8.0/9.0))));
+            sprintf(scale, "%f", (DEFAULT_SCALE * pow(0.9, i)));
             sprintf(output, "mandel%d.jpg", i);
             //set scale and output name
             args[6] = scale;
