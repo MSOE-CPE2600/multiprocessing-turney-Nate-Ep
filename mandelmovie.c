@@ -52,8 +52,8 @@ int main (int argc, char *argv[]) {
                 if (endptr == optarg || *endptr != '\0') {
                     printf("Error: invalid number of threads '%s'\n", optarg);
                     exit(EXIT_FAILURE);
-                } else if (num_proc > 50) {
-                    printf("Number of threads must be in the range of 1 to 50\n");
+                } else if (num_threads > 20) {
+                    printf("Number of threads must be in the range of 1 to 20\n");
                     exit(EXIT_FAILURE);
                 }
                 break;
