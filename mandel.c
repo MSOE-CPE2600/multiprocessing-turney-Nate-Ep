@@ -6,6 +6,13 @@
 //  Converted to use jpg instead of BMP and other minor changes
 //  
 ///
+
+/**
+* @file mandel.c
+* Modified by: Nathan Eppler <epplern@msoe.edu>
+* @date 15 November 2025
+*/
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -33,11 +40,12 @@ int main( int argc, char *argv[] )
 	int    image_width = 1000;
 	int    image_height = 1000;
 	int    max = 1000;
+	int    num_threads = 1;
 
 	// For each command line argument given,
 	// override the appropriate configuration value.
 
-	while((c = getopt(argc,argv,"x:y:s:W:H:m:o:h"))!=-1) {
+	while((c = getopt(argc,argv,"x:y:s:W:H:m:o:ht:"))!=-1) {
 		switch(c) 
 		{
 			case 'x':
@@ -64,6 +72,9 @@ int main( int argc, char *argv[] )
 			case 'h':
 				show_help();
 				exit(1);
+				break;
+			case 't': //add num threads arg
+				num_threads = atoi(optarg);
 				break;
 		}
 	}
