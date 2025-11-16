@@ -10,7 +10,7 @@
 * Due: 19 November 2025
 * 
 * To Compile: gcc -Wextra -o mandelmovie mandelmovie.c -lm
-* To Run: ./mandelmovie -p <num processors>
+* To Run: ./mandelmovie -p <num processors> -t <number of threads>
 * To Stitch Images: ffmpeg -framerate 15 -i mandel%d.jpg -c:v libx264 -pix_fmt yuv420p output.mp4
 */
 
