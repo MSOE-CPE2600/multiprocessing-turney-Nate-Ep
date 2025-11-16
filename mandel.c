@@ -120,10 +120,10 @@ void* compute_image_thread(void *arg) {
 	int height = img->height;
 	int start_row = data->start_row;
 	int end_row = data->end_row;
-	int xmin = data-> xmin;
-	int xmax = data-> xmax;
-	int ymin = data-> ymin;
-	int ymax = data-> ymax;
+	double xmin = data-> xmin;
+	double xmax = data-> xmax;
+	double ymin = data-> ymin;
+	double ymax = data-> ymax;
 	int max = data-> max;
 	// For every pixel in the image...
 
