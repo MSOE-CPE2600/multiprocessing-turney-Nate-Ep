@@ -186,24 +186,25 @@ void compute_image(imgRawImage* img, double xmin, double xmax, double ymin, doub
 
 	int img_height = img->height;
 	int num_rows = img_height / num_threads; //calc num rows per thread
+	int start, end;
 
-	for (int i = 0; i < img_height - 1; i += num_rows) { //FIXME ERROR WITH INDEXING, cannot use i as index for data :(
+	for (int i = 0; i < num_threads; i++) { 
+		start = i*num_rows;
+		end = (i == num_rows - 1) ? img_height : start+num_rows;
 		//create data for thread
-		currdata = &data[i / num_rows];
+		currdata = &data[i];
 		currdata->img = img;
 		currdata->xmin = xmin;
 		currdata->ymin = ymin;
 		currdata->xmax = xmax;
 		currdata->ymax = ymax;
 		currdata->max = max;
-		currdata->start_row = i;
-		currdata->end_row = i+num_rows;
+		currdata->start_row = start;
+		currdata->end_row = end;
 		//create thread
-		pthread_create(&threads[i], NULL, &compute_image_thread, &data[i/num]);
+		pthread_create(&threads[i], NULL, &compute_image_thread, &data[i]);
 		
 	}
-	//make last thread run until end of image if there was a remaineder in num_rows calculation
-	pthread_create(&threads[num_threads], NULL, &compute_image_thread, &data[num_threads]);
 
 	//wait for all threads
 	int retval;

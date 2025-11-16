@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-c -Wall -g
+CFLAGS=-c -Wextra -g
 LDFLAGS=-ljpeg -lpthread
 SOURCES= mandel.c jpegrw.c
 OBJECTS=$(SOURCES:.c=.o)
