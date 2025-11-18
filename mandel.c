@@ -114,6 +114,7 @@ int main( int argc, char *argv[] )
 
 void* compute_image_thread(void *arg) {
 	int i,j;
+	//get all of the data from the argument
 	thread_data *data = (thread_data*)arg;
 	imgRawImage *img = data->img;
 	int width = img->width;
@@ -126,7 +127,6 @@ void* compute_image_thread(void *arg) {
 	double ymax = data-> ymax;
 	int max = data-> max;
 	// For every pixel in the image...
-
 
 	for(j=start_row;j<end_row;j++) {
 		for(i=0;i<width;i++) {
